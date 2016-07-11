@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Imagined Reality by Benjamin Aguillon</title>
+    <meta name="description" content="Imagined Reality by Benjamin Aguillon">
+    <script src="../lib/aframe.min.js"></script>
+    <script src="../lib/aframe-cubemap-component.js"></script>
+    <script src="../lib/aframe-stereo-component.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Camera -->
+      <a-entity position="0 0 0">
+        <a-entity camera look-controls stereocam="eye:left;"></a-entity>
+      </a-entity>
+
+      <!-- Sky cubes -->
+      <a-entity id="sky1" cubemap="folder:../assets/imagined-reality/left/;" stereo="eye:left"></a-entity>
+      <a-entity id="sky2" cubemap="folder:../assets/imagined-reality/right/;" stereo="eye:right"></a-entity>
+
+    </a-scene>
+  </body>
+</html>
