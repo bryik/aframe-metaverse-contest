@@ -16,9 +16,25 @@
       </a-entity>
 
       <!-- Sky cubes -->
-      <a-entity id="sky1" cubemap="folder:../assets/fushimi-inari/left/;" stereo="eye:left"></a-entity>
-      <a-entity id="sky2" cubemap="folder:../assets/fushimi-inari/right/;" stereo="eye:right"></a-entity>
+      <a-entity id="sky1" cubemap="folder:../assets/fushimi-inari/left/;"></a-entity>
+      <a-entity id="sky2" cubemap="folder:../assets/fushimi-inari/right/;"></a-entity>
 
     </a-scene>
+    <!-- Terrible hack to bypass Firefox error -->
+    <script type="text/javascript">
+      var scene = document.querySelector('a-scene');
+      if (scene.hasLoaded) {
+        run();
+      } else {
+        scene.addEventListener('loaded', run);
+      }
+      function run () {
+        var sky1 = document.querySelector('#sky1');
+        sky1.setAttribute('stereo', 'eye:left');
+
+        var sky2 = document.querySelector('#sky2');
+        sky2.setAttribute('stereo', 'eye:right');
+      }
+    </script>
   </body>
 </html>
