@@ -1,5 +1,9 @@
 # Winners of OTOY's "Render the Metaverse" Contest
 
+<p align="center">
+  <img src="preview.png"/>
+</p>
+
 Displaying the winning stereoscopic cubemaps with A-Frame. Tested and working on Vive.
 
 ## Notes
