@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Imagined Reality by Benjamin Aguillon</title>
-    <meta name="description" content="Imagined Reality by Benjamin Aguillon">
-    <script src="../lib/aframe.min.js"></script>
-    <script src="../lib/aframe-cubemap-component.js"></script>
-    <script src="../lib/aframe-stereo-component.js"></script>
+    <meta name="description" content="Imagined Reality by Benjamin Aguillon" />
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="../lib/aframe-stereocam-component.js"></script>
+    <script src="https://unpkg.com/aframe-cubemap-component@2.1.1/dist/aframe-cubemap-component.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -15,25 +15,35 @@
         <a-entity camera look-controls stereocam="eye:left;"></a-entity>
       </a-entity>
 
-      <!-- Sky cubes -->
-      <a-entity id="sky1" cubemap="folder:../assets/imagined-reality/left/;"></a-entity>
-      <a-entity id="sky2" cubemap="folder:../assets/imagined-reality/right/;"></a-entity>
-
+      <!-- Cubemaps -->
+      <a-entity
+        id="left-cube"
+        cubemap="folder:../assets/imagined-reality/left/;ext:png"
+      ></a-entity>
+      <a-entity
+        id="right-cube"
+        cubemap="folder:../assets/imagined-reality/right/;ext:png"
+      ></a-entity>
     </a-scene>
-    <!-- Terrible hack to bypass Firefox error -->
     <script type="text/javascript">
-      var scene = document.querySelector('a-scene');
+      const scene = document.querySelector("a-scene");
+
       if (scene.hasLoaded) {
         run();
       } else {
-        scene.addEventListener('loaded', run);
+        scene.addEventListener("loaded", run);
       }
-      function run () {
-        var sky1 = document.querySelector('#sky1');
-        sky1.setAttribute('stereo', 'eye:left');
 
-        var sky2 = document.querySelector('#sky2');
-        sky2.setAttribute('stereo', 'eye:right');
+      function run() {
+        // Only show leftCube to left eye.
+        let leftCubeEl = document.querySelector("#left-cube");
+        let leftCube = leftCubeEl.getObject3D("cubemap");
+        leftCube.layers.set(1);
+
+        // Only show rightCube to right eye.
+        let rightCubeEl = document.querySelector("#right-cube");
+        let rightCube = rightCubeEl.getObject3D("cubemap");
+        rightCube.layers.set(2);
       }
     </script>
   </body>
